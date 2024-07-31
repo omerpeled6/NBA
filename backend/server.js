@@ -11,6 +11,7 @@ import myPlayerRoutes from './routes/myPlayerRoutes.js';
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +29,8 @@ app.use('/api/myplayer', myPlayerRoutes);
 mongoose
   .connect(process.env.MONGOURI, { dbName: 'demo_db' })
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log('Connected to db & listening on port', process.env.PORT);
+    app.listen(PORT, () => {
+      console.log('Connected to db & listening on port', PORT);
     });
   })
   .catch((error) => {
