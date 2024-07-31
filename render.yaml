@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nba-backend
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'node src/index.js'
+    envVars:
+      - key: DATABASE_URL
+        value: <your-database-url>
+      - key: JWT_SECRET
+        value: <your-jwt-secret>
+  - type: static
+    name: nba-frontend
+    env: static
+    plan: free
+    buildCommand: 'cd frontend && npm install && npm run build'
+    staticPublishPath: 'frontend/build'
+    envVars:
+      - key: REACT_APP_API_URL
+        value: 'https://nba-backend-wzsw.onrender.com'
